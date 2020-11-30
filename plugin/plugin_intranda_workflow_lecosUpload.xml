@@ -1,0 +1,7 @@
+<config_plugin>
+	<allowed-file-extensions>/(\.|\/)(gif|jpe?g|png|tiff?|jp2|pdf)$/</allowed-file-extensions>
+
+	<processTemplateName>LecosImportTest</processTemplateName>
+
+	<metadataDocumentType>Monograph</metadataDocumentType>
+</config_plugin>
