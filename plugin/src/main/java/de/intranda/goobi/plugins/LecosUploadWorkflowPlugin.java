@@ -70,6 +70,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
     private String title = "intranda_workflow_lecosUpload";
 
     private String metadataDocumentType;
+    private Perl5Util perlUtil = new Perl5Util();
 
     @Override
     public String getGui() {
@@ -123,7 +124,6 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
     }
 
     public void sortFiles() {
-        ;
         this.uploadedFiles.sort(Comparator.comparing(MassUploadedFile::getFilename));
 
         Collections.sort(uploadedFiles);
@@ -298,7 +298,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
      */
     private void assignProcessToFile(MassUploadedFile uploadedFile, Map<String, List<Process>> searchCache) {
         // get the relevant part of the file name
-        Perl5Util perlUtil = new Perl5Util();
+
         String processTitle = null;
         if (perlUtil.match("/(.*)_(\\d+)\\.jpg/", uploadedFile.getFilename())) {
             processTitle = perlUtil.group(1);
