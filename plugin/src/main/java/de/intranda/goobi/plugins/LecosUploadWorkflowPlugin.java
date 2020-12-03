@@ -270,10 +270,12 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
 
                 // identifier
                 Metadata identifier = new Metadata(identifierType);
-                identifier.setValue(processTitle.replaceAll("\\W", "_"));
+                identifier.setValue(processTitle);
                 logical.addMetadata(identifier);
 
-                newProcess.writeMetadataFile(mm);
+                String metsFileName = newProcess.getProcessDataDirectory() + "meta.xml";
+                mm.write(metsFileName);
+
             } catch (UGHException | IOException | InterruptedException | SwapException | DAOException e) {
                 log.error(e);
             }
