@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.oro.text.perl.Perl5Util;
@@ -300,7 +302,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
         // get the relevant part of the file name
 
         String processTitle = null;
-        if (perlUtil.match("/(.*)_(\\d+)\\.jpg/", uploadedFile.getFilename())) {
+        if (perlUtil.match("/.*(BA_\\d+[_-](\\d+)).*\\.jpg/", uploadedFile.getFilename())) {
             processTitle = perlUtil.group(1);
         } else {
             uploadedFile.setStatusmessage(Helper.getTranslation("intranda_workflow_lecosWrongFilename"));
@@ -308,7 +310,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
         }
         // check if process already exists
         if (processTitle != null) {
-            processTitle = processTitle.replaceAll("\\W", "");
+            processTitle = processTitle.replace("-", "_");
             if (!processTitleChecks.containsKey(processTitle)) {
                 Process p = ProcessManager.getProcessByExactTitle(processTitle);
                 if (p != null) {
@@ -324,6 +326,31 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
             } else {
                 uploadedFile.setStatus(MassUploadedFileStatus.OK);
                 uploadedFile.setProcessTitle(processTitle);
+                Set<String> processNames = processFilenameMap.keySet();
+                for (String otherTitle : new HashSet<>(processNames)) {
+                    if (otherTitle.startsWith(processTitle)) {
+                        // processTitle = correct value
+                        List<MassUploadedFile> otherImages = processFilenameMap.get(otherTitle);
+
+                        processFilenameMap.remove(otherTitle);
+                        for (MassUploadedFile muf : otherImages) {
+                            muf.setProcessTitle(processTitle);
+                        }
+                        if (processFilenameMap.containsKey(processTitle)) {
+                            List<MassUploadedFile> processImages = processFilenameMap.get(processTitle);
+                            processImages.addAll(otherImages);
+                            processFilenameMap.put(processTitle, processImages);
+
+                        } else {
+                            processFilenameMap.put(processTitle, otherImages);
+                        }
+
+                    } else if (processTitle.startsWith(otherTitle)) {
+                        processTitle = otherTitle;
+                        uploadedFile.setProcessTitle(otherTitle);
+                    }
+                }
+
                 if (processFilenameMap.containsKey(processTitle)) {
                     List<MassUploadedFile> images = processFilenameMap.get(processTitle);
                     images.add(uploadedFile);
