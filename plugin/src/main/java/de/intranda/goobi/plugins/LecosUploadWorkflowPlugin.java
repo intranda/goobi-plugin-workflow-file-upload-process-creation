@@ -91,7 +91,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
 
         metadataDocumentType = conf.getString("metadataDocumentType", "Monograph");
 
-        LoginBean login = (LoginBean) Helper.getManagedBeanValue("#{LoginForm}");
+        LoginBean login = Helper.getLoginBean();
         if (login != null) {
             user = login.getMyBenutzer();
         }
@@ -368,7 +368,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
     public boolean getShowInsertButton() {
         boolean showInsertButton =
                 this.uploadedFiles.size() > 0 && this.uploadedFiles.stream().allMatch(muf -> muf.getStatus() != MassUploadedFileStatus.UNKNWON);
-                return showInsertButton;
+        return showInsertButton;
     }
 
     public boolean isShowInsertButton() {
