@@ -1,7 +1,12 @@
 <config_plugin>
+	
+	<!-- which file types shall be allowed for uploading these -->
 	<allowed-file-extensions>/(\.|\/)(gif|jpe?g|png|tiff?|jp2|pdf)$/</allowed-file-extensions>
 
+	<!-- which process template shall be used to create the new processes -->
 	<processTemplateName>ImportWorkflow</processTemplateName>
 
+	<!-- which publication type shall be used inside of the created METS files -->
 	<metadataDocumentType>Monograph</metadataDocumentType>
+
 </config_plugin>
