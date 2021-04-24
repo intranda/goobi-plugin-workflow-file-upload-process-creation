@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.oro.text.perl.Perl5Util;
 import org.junit.Test;
 
-public class LecosUploadPluginTest {
+public class FileUploadProcessCreationWorkflowPluginTest {
 
 
     @Test public void testRegularExpression () {

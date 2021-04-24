@@ -3,15 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.intranda.goobi.plugins.workflow</groupId>
-	<artifactId>lecosUpload-gui</artifactId>
+	<artifactId>fileUploadProcessCreation-gui</artifactId>
 	<version>1.0.0</version>
 	<properties>
-		<jar.name>plugin_intranda_workflow_lecosUpload-GUI</jar.name>
+		<jar.name>plugin_intranda_workflow_fileUploadProcessCreation-GUI</jar.name>
 		<dest.folder>/opt/digiverso/goobi/plugins/GUI/</dest.folder>
 	</properties>
 	<parent>
 		<groupId>de.intranda.goobi.plugins.workflow</groupId>
-		<artifactId>lecosUpload</artifactId>
+		<artifactId>fileUploadProcessCreation</artifactId>
 		<version>1.0.0</version>
 	</parent>
 	<build>
@@ -68,7 +68,7 @@
 		</plugins>
 	</build>
 	<scm>
-		<url>scm:git:ssh://git@gitea.intranda.com:goobi-workflow/goobi-plugin-workflow-lecosUpload.git</url>
-		<connection>scm:git:ssh://git@gitea.intranda.com:goobi-workflow/goobi-plugin-workflow-lecosUpload.git</connection>
+		<url>scm:git:ssh://git@gitea.intranda.com:goobi-workflow/goobi-plugin-workflow-fileupload-processcreation.git</url>
+		<connection>scm:git:ssh://git@gitea.intranda.com:goobi-workflow/goobi-plugin-workflow-fileupload-processcreation.git</connection>
 	</scm>
 </project>

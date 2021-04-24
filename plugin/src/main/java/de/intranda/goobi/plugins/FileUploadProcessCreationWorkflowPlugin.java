@@ -56,7 +56,7 @@ import ugh.fileformats.mets.MetsMods;
 @PluginImplementation
 @Log4j2
 @Data
-public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
+public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin, IPlugin {
 
     private String allowedTypes;
 
@@ -69,20 +69,20 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
 
     private String processTemplateName;
     private BeanHelper bHelper = new BeanHelper();
-    private String title = "intranda_workflow_lecosUpload";
+    private String title = "intranda_workflow_fileUploadProcessCreation";
 
     private String metadataDocumentType;
     private Perl5Util perlUtil = new Perl5Util();
 
     @Override
     public String getGui() {
-        return "/uii/plugin_workflow_lecosUpload.xhtml";
+        return "/uii/plugin_workflow_fileUploadProcessCreation.xhtml";
     }
 
     /**
      * Constructor
      */
-    public LecosUploadWorkflowPlugin() {
+    public FileUploadProcessCreationWorkflowPlugin() {
         log.info("Mass upload plugin started");
         XMLConfiguration conf = ConfigPlugins.getPluginConfig(title);
         allowedTypes = conf.getString("allowed-file-extensions", "/(\\.|\\/)(gif|jpe?g|png|tiff?|jp2|pdf)$/");
@@ -290,7 +290,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
             }
         }
 
-        Helper.setMeldung(Helper.getTranslation("intranda_workflow_lecosProcessCreated", "" + processFilenameMap.size()));
+        Helper.setMeldung(Helper.getTranslation("plugin_workflow_fileUploadPCProcessCreated", "" + processFilenameMap.size()));
 
         cleanUploadFolder();
     }
@@ -307,7 +307,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
         if (perlUtil.match("/.*(BA_\\d+[_-](\\d+)).*\\.jpg/", uploadedFile.getFilename())) {
             processTitle = perlUtil.group(1);
         } else {
-            uploadedFile.setStatusmessage(Helper.getTranslation("intranda_workflow_lecosWrongFilename"));
+            uploadedFile.setStatusmessage(Helper.getTranslation("plugin_workflow_fileUploadPCWrongFilename"));
             uploadedFile.setStatus(MassUploadedFileStatus.ERROR);
         }
         // check if process already exists
@@ -323,7 +323,7 @@ public class LecosUploadWorkflowPlugin implements IWorkflowPlugin, IPlugin {
             }
 
             if (processTitleChecks.get(processTitle)) {
-                uploadedFile.setStatusmessage(Helper.getTranslation("intranda_workflow_lecosProcessExists", processTitle));
+                uploadedFile.setStatusmessage(Helper.getTranslation("plugin_workflow_fileUploadPCProcessExists", processTitle));
                 uploadedFile.setStatus(MassUploadedFileStatus.ERROR);
             } else {
                 uploadedFile.setStatus(MassUploadedFileStatus.OK);
