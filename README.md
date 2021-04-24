@@ -1,8 +1,8 @@
-# Goobi Workflow Plugin: goobi-plugin-workflow-lecosUpload
+# Goobi Workflow Plugin: goobi-plugin-workflow-fileupload-processcreation
 
 <img src="https://goobi.io/wp-content/uploads/logo_goobi_plugin.png" align="right" style="margin:0 0 20px 20px;" alt="Plugin for Goobi workflow" width="175" height="109">
 
-This is the LecosUpload Goobi workflow plugin. A description for this plugin is still missing.
+This is a Goobi workflow plugin for the upload of multiple files to allow an automatic process creation based on the the uploaded files. Files with similar names are used to create basic Goobi processes and assign these files to it.
 
 This is a plugin for Goobi workflow, the open source workflow tracking software for digitisation projects. More information about Goobi workflow is available under https://goobi.io. If you want to get in touch with the user community simply go to https://community.goobi.io.
 
@@ -12,11 +12,11 @@ More information about the functionality of this plugin and the complete documen
 
 Detail | Description
 --- | ---
-**Plugin identifier**       | intranda_workflow_lecosUpload
+**Plugin identifier**       | intranda_workflow_fileUploadProcessCreation
 **Plugin type**             | Workflow plugin
 **Licence**                 | GPL 2.0 or newer  
-**Documentation (German)**  | - no documentation available -
-**Documentation (English)** | - no documentation available -
+**Documentation (German)**  | https://docs.goobi.io/goobi-workflow-plugins-de/workflow/intranda_workflow_fileupload_processcreation
+**Documentation (English)** | https://docs.goobi.io/goobi-workflow-plugins-en/workflow/intranda_workflow_fileupload_processcreation
 
 ## Goobi details
 
