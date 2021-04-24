@@ -72,6 +72,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
     private String title = "intranda_workflow_fileUploadProcessCreation";
 
     private String metadataDocumentType;
+    private String namingSchema;
     private Perl5Util perlUtil = new Perl5Util();
 
     @Override
@@ -91,6 +92,8 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
 
         metadataDocumentType = conf.getString("metadataDocumentType", "Monograph");
 
+        namingSchema = conf.getString("namingSchema", "/.*(BA_\\d+[_-](\\d+)).*\\.jpg/");
+        
         LoginBean login = Helper.getLoginBean();
         if (login != null) {
             user = login.getMyBenutzer();
@@ -304,7 +307,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
         // get the relevant part of the file name
 
         String processTitle = null;
-        if (perlUtil.match("/.*(BA_\\d+[_-](\\d+)).*\\.jpg/", uploadedFile.getFilename())) {
+        if (perlUtil.match(namingSchema, uploadedFile.getFilename())) {
             processTitle = perlUtil.group(1);
         } else {
             uploadedFile.setStatusmessage(Helper.getTranslation("plugin_workflow_fileUploadPCWrongFilename"));
