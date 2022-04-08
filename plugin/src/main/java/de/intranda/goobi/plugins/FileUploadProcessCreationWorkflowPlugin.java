@@ -26,7 +26,7 @@ import org.goobi.production.enums.PluginType;
 import org.goobi.production.plugin.interfaces.IPlugin;
 import org.goobi.production.plugin.interfaces.IWorkflowPlugin;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 
 import de.intranda.goobi.plugins.massuploadutils.MassUploadedFile;
 import de.intranda.goobi.plugins.massuploadutils.MassUploadedFileStatus;
@@ -93,7 +93,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
         metadataDocumentType = conf.getString("metadataDocumentType", "Monograph");
 
         namingSchema = conf.getString("namingSchema", "/.*(BA_\\d+[_-](\\d+)).*\\.jpg/");
-        
+
         LoginBean login = Helper.getLoginBean();
         if (login != null) {
             user = login.getMyBenutzer();
@@ -121,7 +121,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
                 }
             }
             UploadedFile upload = event.getFile();
-            saveFileTemporary(upload.getFileName(), upload.getInputstream());
+            saveFileTemporary(upload.getFileName(), upload.getInputStream());
         } catch (IOException e) {
             log.error("Error while uploading files", e);
         }
@@ -371,7 +371,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
     public boolean getShowInsertButton() {
         boolean showInsertButton =
                 this.uploadedFiles.size() > 0 && this.uploadedFiles.stream().allMatch(muf -> muf.getStatus() != MassUploadedFileStatus.UNKNWON);
-        return showInsertButton;
+                return showInsertButton;
     }
 
     public boolean isShowInsertButton() {
