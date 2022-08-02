@@ -244,7 +244,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
                         }
                         Path target = Paths.get(targetFolder.toString(), muf.getFilename());
                         StorageProvider.getInstance().copyFile(src, target);
-                    } catch (IOException | InterruptedException | SwapException | DAOException e) {
+                    } catch (IOException | SwapException e) {
                         muf.setStatus(MassUploadedFileStatus.ERROR);
                         muf.setStatusmessage("File could not be copied");
                         log.error("Error while copying file during mass upload", e);
@@ -279,7 +279,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
                 String metsFileName = newProcess.getProcessDataDirectory() + "meta.xml";
                 mm.write(metsFileName);
 
-            } catch (UGHException | IOException | InterruptedException | SwapException | DAOException e) {
+            } catch (UGHException | IOException | SwapException e) {
                 log.error(e);
             }
 
