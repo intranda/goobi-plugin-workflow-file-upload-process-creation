@@ -2,14 +2,15 @@ package de.intranda.goobi.plugins;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.oro.text.perl.Perl5Util;
 import org.junit.Test;
 
 public class FileUploadProcessCreationWorkflowPluginTest {
 
-
-    @Test public void testRegularExpression () {
+    @Test
+    public void testRegularExpression() {
         List<String> test = new ArrayList<>();
         test.add("abc.jpg");
         test.add("Stadtarchiv Crowdsourcing 06. Post BA_1991_336112.jpg");
@@ -18,13 +19,14 @@ public class FileUploadProcessCreationWorkflowPluginTest {
         test.add("BA_1988_26870.jpg");
         test.add("Stadtarchiv Crowdsourcing 06. Post BA_1991_336113.jpg");
 
-        Perl5Util perlUtil = new Perl5Util();
-
+        Pattern pattern = Pattern.compile("(.*)_(\\d+)\\.jpg");
         for (String s : test) {
-            if (perlUtil.match("/(.*)_(\\d+)\\.jpg/", s)) {
+            Matcher matcher = pattern.matcher(s);
+            if (matcher.matches()) {
+
                 System.out.println("match");
-                System.out.println(perlUtil.group(1));
-                System.out.println(perlUtil.group(2));
+                System.out.println(matcher.group(1));
+                System.out.println(matcher.group(2));
             }
             //            Matcher m =pattern.matcher(s);
             //            System.out.println(m.group());

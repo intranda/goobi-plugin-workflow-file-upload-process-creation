@@ -15,9 +15,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.configuration.XMLConfiguration;
-import org.apache.oro.text.perl.Perl5Util;
 import org.goobi.beans.Process;
 import org.goobi.beans.Step;
 import org.goobi.beans.User;
@@ -58,13 +59,15 @@ import ugh.fileformats.mets.MetsMods;
 @Data
 public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin, IPlugin {
 
+    private static final long serialVersionUID = -2750139629101527562L;
+
     private String allowedTypes;
 
-    private List<MassUploadedFile> uploadedFiles = new ArrayList<>();
+    private transient List<MassUploadedFile> uploadedFiles = new ArrayList<>();
     private User user;
     private File tempFolder;
 
-    private Map<String, List<MassUploadedFile>> processFilenameMap = new HashMap<>();
+    private transient Map<String, List<MassUploadedFile>> processFilenameMap = new HashMap<>();
     private Map<String, Boolean> processTitleChecks = new HashMap<>();
 
     private String processTemplateName;
@@ -73,7 +76,6 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
 
     private String metadataDocumentType;
     private String namingSchema;
-    private Perl5Util perlUtil = new Perl5Util();
 
     @Override
     public String getGui() {
@@ -286,7 +288,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
             // check if automatic steps must be executed
 
             for (Step s : newProcess.getSchritte()) {
-                if (s.getBearbeitungsstatusEnum().equals(StepStatus.OPEN) && s.isTypAutomatisch()) {
+                if (StepStatus.OPEN.equals(s.getBearbeitungsstatusEnum()) && s.isTypAutomatisch()) {
                     ScriptThreadWithoutHibernate myThread = new ScriptThreadWithoutHibernate(s);
                     myThread.start();
                 }
@@ -307,8 +309,10 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
         // get the relevant part of the file name
 
         String processTitle = null;
-        if (perlUtil.match(namingSchema, uploadedFile.getFilename())) {
-            processTitle = perlUtil.group(1);
+        Pattern pattern = Pattern.compile(namingSchema);
+        Matcher matcher = pattern.matcher(uploadedFile.getFilename());
+        if (matcher.matches()) {
+            processTitle = matcher.group(1);
         } else {
             uploadedFile.setStatusmessage(Helper.getTranslation("plugin_workflow_fileUploadPCWrongFilename"));
             uploadedFile.setStatus(MassUploadedFileStatus.ERROR);
@@ -325,7 +329,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
                 }
             }
 
-            if (processTitleChecks.get(processTitle)) {
+            if (processTitleChecks.get(processTitle).booleanValue()) {
                 uploadedFile.setStatusmessage(Helper.getTranslation("plugin_workflow_fileUploadPCProcessExists", processTitle));
                 uploadedFile.setStatus(MassUploadedFileStatus.ERROR);
             } else {
@@ -369,9 +373,7 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
     }
 
     public boolean getShowInsertButton() {
-        boolean showInsertButton =
-                this.uploadedFiles.size() > 0 && this.uploadedFiles.stream().allMatch(muf -> muf.getStatus() != MassUploadedFileStatus.UNKNWON);
-                return showInsertButton;
+        return !uploadedFiles.isEmpty() && this.uploadedFiles.stream().allMatch(muf -> muf.getStatus() != MassUploadedFileStatus.UNKNWON);
     }
 
     public boolean isShowInsertButton() {

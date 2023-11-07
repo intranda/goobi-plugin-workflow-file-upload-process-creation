@@ -10,6 +10,6 @@
 	<metadataDocumentType>Monograph</metadataDocumentType>
 
 	<!-- define a naming schema for the file names to be matched for the process creation -->
-	<namingSchema>/.*(BA_\\d+[_-](\\d+)).*\\.jpg/</namingSchema>
+	<namingSchema>.*(BA_\\d+[_-](\\d+)).*\\.jpg</namingSchema>
 	
 </config_plugin>
