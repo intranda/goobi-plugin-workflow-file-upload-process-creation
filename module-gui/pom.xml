@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.goobi.workflow.plugin</groupId>
-    <artifactId>plugin-workflow-fileUploadProcessCreation</artifactId>
+    <artifactId>plugin-workflow-file-upload-process-creation</artifactId>
     <version>24.03-SNAPSHOT</version>
   </parent>
-  <artifactId>plugin-workflow-fileUploadProcessCreation-gui</artifactId>
+  <artifactId>plugin-workflow-file-upload-process-creation-gui</artifactId>
   <packaging>jar</packaging>
   <build>
     <resources>
