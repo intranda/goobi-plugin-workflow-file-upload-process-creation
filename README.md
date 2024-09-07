@@ -15,8 +15,8 @@ Detail                      | Description
 **Plugin identifier**       | intranda_workflow_fileUploadProcessCreation
 **Plugin type**             | workflow
 **Licence**                 | GPL 2.0 or newer
-**Documentation (German)**  | https://docs.goobi.io/workflow-plugins/v/eng/workflow/goobi-plugin-workflow-file-upload-process-creation
-**Documentation (English)** | https://docs.goobi.io/workflow-plugins/v/ger/workflow/goobi-plugin-workflow-file-upload-process-creation
+**Documentation (German)**  | https://docs.goobi.io/workflow-plugins/v/ger/workflow/goobi-plugin-workflow-file-upload-process-creation
+**Documentation (English)** | https://docs.goobi.io/workflow-plugins/v/eng/workflow/goobi-plugin-workflow-file-upload-process-creation
 
 ## Goobi details
 
