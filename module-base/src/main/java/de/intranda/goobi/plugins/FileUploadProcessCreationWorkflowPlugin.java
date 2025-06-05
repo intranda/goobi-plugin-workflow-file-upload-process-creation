@@ -225,8 +225,6 @@ public class FileUploadProcessCreationWorkflowPlugin implements IWorkflowPlugin,
             newProcess.setRegelsatz(template.getRegelsatz());
             newProcess.setDocket(template.getDocket());
             bHelper.SchritteKopieren(template, newProcess);
-            bHelper.ScanvorlagenKopieren(template, newProcess);
-            bHelper.WerkstueckeKopieren(template, newProcess);
             bHelper.EigenschaftenKopieren(template, newProcess);
 
             try {
