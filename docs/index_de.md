@@ -3,6 +3,10 @@ title: Vorgangserstellung durch Dateiupload
 identifier: intranda_workflow_fileUploadProcessCreation
 description: Dies ist ein Goobi workflow Plugin für den Upload von mehreren Dateien, um eine automatische Vorgangserstellung auf Basis der hochgeladenen Dateien zu ermöglichen. Aus Dateien mit ähnlichen Namen werd
 published: true
+keywords:
+    - Goobi workflow
+    - Plugin
+    - Workflow Plugin
 ---
 ## Einführung
 Dieses Workflow-Plugin erlaubt einen Massenupload von Dateien, auf deren Basis automatisch Goobi-Vorgänge erzeugt werden. Die zu verwendende Produktionsvorlage kann hierbei ebenso wie der zu erzeugende Publikationstyp über eine Konfiguration festgelegt werden. Zusammengehörige Dateien werden nach dem Erzeugen des Vorgangs automatisch zugewiesen.
