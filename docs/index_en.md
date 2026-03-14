@@ -1,7 +1,7 @@
 ---
 title: Process creation through file upload
 identifier: intranda_workflow_fileUploadProcessCreation
-description: This is a Goobi workflow plugin for the upload of multiple files to allow an automatic process creation based on the the uploaded files. Files with similar names are used to create basic Goobi process
+description: This is a Goobi workflow plugin for the upload of multiple files to allow an automatic process creation based on the uploaded files. Files with similar names are used to create basic Goobi process
 published: true
 keywords:
     - Goobi workflow

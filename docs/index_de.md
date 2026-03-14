@@ -41,7 +41,7 @@ Wenn das Plugin korrekt installiert und konfiguriert wurde, ist es innerhalb des
 
 ![Geöffnetes Plugin für den Upload](screen3_de.png)
 
-An dieser Stellen können nun Dateien hochgeladen werden. Nach der Analyse der Dateinamen erzeugt Goobi die entsprechenden Vorgänge automatisch.
+An dieser Stelle können nun Dateien hochgeladen werden. Nach der Analyse der Dateinamen erzeugt Goobi die entsprechenden Vorgänge automatisch.
 
 
 ## Konfiguration
@@ -69,7 +69,7 @@ Die Konfiguration des Plugins gestaltet sich wie folgt:
 
 | Wert | Beschreibung |
 | :--- | :--- |
-| `allowed-file-extensions` | Mit diesem Parameter wird festgelegt, welche Datein hochgeladen werden dürfen. Hierbei handelt es sich um einen regulären Ausdruck. |
+| `allowed-file-extensions` | Mit diesem Parameter wird festgelegt, welche Dateien hochgeladen werden dürfen. Hierbei handelt es sich um einen regulären Ausdruck. |
 | `processTemplateName` | Mit diesem Parameter kann definiert werden, welche Produktionsvorlage für die zu erzeugenden Vorgänge verwendet werden sollen. |
 | `metadataDocumentType` | Legen Sie hiermit fest, welcher Publikationstyp innerhalb der METS-Datei verwendet werden soll für die neu zu erzeugenden Vorgänge. |
 | `namingSchema` | Definieren Sie hier einen regulären Ausdruck, der auf das Benennungsschema der hochgeladenen Dateien zutreffen soll. Dieser ist maßgeblich für die Erzeugung der Vorgänge sowie die Zusammengehörigkeit der Bilder zu den Vorgängen. |
